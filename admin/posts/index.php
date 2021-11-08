@@ -68,13 +68,13 @@
                                 <td><?php echo $key + 1; ?></td>
                                 <td><?php echo $post['title']; ?></td>
                                 <td>Awa</td>
-                                <td><a href="#" class="edit">edit</a></td>
-                                <td><a href="#" class="delete">delete</a></td>
+                                <td><a href="edit.php?id=<?php echo $post['id'] ?>" class="edit">edit</a></td>
+                                <td><a href="edit.php?del_id=<?php echo $post['id'] ?>" class="delete">delete</a></td>
                                 
                                 <?php if ($post['published']): ?>
-                                    <td><a href="#" class="publish">unpublish</a></td>
+                                    <td><a href="edit.php?published=0&p_id=<?php echo $post['id'] ?>" class="unpublish">unpublish</a></td>
                                 <?php else: ?>
-                                    <td><a href="#" class="publish">publish</a></td>
+                                    <td><a href="edit.php?published=1&p_id=<?php echo $post['id'] ?>" class="publish">publish</a></td>
                                 <?php endif; ?>
                             </tr>    
                             <?php endforeach; ?>                        

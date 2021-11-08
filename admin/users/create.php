@@ -1,5 +1,6 @@
 <?php
     include("../../path.php");
+    include(ROOT_PATH . "/app/controllers/users.php");
 ?>
 
 <!DOCTYPE html>
@@ -51,21 +52,20 @@
                 <div class="content">
 
                     <h2 class="page-title">Add User</h2>
+                    <?php include(ROOT_PATH . "/app/helpers/formErrors.php") ?>
 
-                    <form action="create.html" method="post">
+                    <form action="create.php" method="post">
                         <div>
                             <label>Username</label>
-                            <input type="text" name="username"
-                                class="text-input">
+                            <input type="text" name="username" class="text-input" value="<?php echo $username; ?>">
                         </div>
                         <div>
                             <label>Email</label>
-                            <input type="email" name="email" class="text-input">
+                            <input type="email" name="email" class="text-input" value="<?php echo $email; ?>">
                         </div>
                         <div>
                             <label>Password</label>
-                            <input type="password" name="password"
-                                class="text-input">
+                            <input type="password" name="password" class="text-input">
                         </div>
                         <div>
                             <label>Password Confirmation</label>
@@ -73,15 +73,12 @@
                                 class="text-input">
                         </div>
                         <div>
-                            <label>Role</label>
-                            <select name="role" class="text-input">
-                                <option value="Author">Author</option>
-                                <option value="Admin">Admin</option>
-                            </select>
+                            <input type="checkbox" name="admin" id="admin">
+                            <label for="admin">Admin</label>
                         </div>
 
                         <div>
-                            <button type="submit" class="btn btn-big">Add User</button>
+                            <button type="submit" name="create-admin" class="btn btn-big">Add User</button>
                         </div>
                     </form>
 

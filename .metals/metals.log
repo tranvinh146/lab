@@ -1,0 +1,5 @@
+[0m2021.11.04 10:40:02 INFO  Started: Metals version 0.10.9 in workspace '\\wsl.localhost\Ubuntu-20.04\var\www\tranvinhlab' for client Visual Studio Code 1.61.2.[0m
+[0m2021.11.04 10:40:04 INFO  time: initialize in 2.08s[0m
+[0m2021.11.04 10:40:07 WARN  Build server is not auto-connectable.[0m
+[0m2021.11.04 10:40:07 WARN  no build tool detected in workspace '\\wsl.localhost\Ubuntu-20.04\var\www\tranvinhlab'. The most common cause for this problem is that the editor was opened in the wrong working directory, for example if you use sbt then the workspace directory should contain build.sbt. [0m
+[0m2021.11.04 10:40:28 INFO  shutting down Metals[0m

@@ -54,14 +54,21 @@ if (isset($_GET['del_id'])) {
 
 if (isset($_POST['update-topic'])) {
 
-    $id = $_POST['id'];
-    unset($_POST['update-topic'], $_POST['id']);
-    $topic_id = update($table, $id, $_POST);
+    $errors = validateTopic($_POST);    
 
-    $_SESSION['message'] = 'Topic is updated sucessfully';
-    $_SESSION['type'] = 'success';
-    header('location: ' . BASE_URL . '/admin/topics/index.php');
+    if (count($errors) === 0) {
+        $id = $_POST['id'];
+        unset($_POST['update-topic'], $_POST['id']);
+        $topic_id = update($table, $id, $_POST);
 
-    exit();
+        $_SESSION['message'] = 'Topic is updated sucessfully';
+        $_SESSION['type'] = 'success';
+        header('location: ' . BASE_URL . '/admin/topics/index.php');
+
+        exit();
+    } else {
+        $name = $_POST['name'];
+        $description = $_POST['description'];
+    }   
 
 }

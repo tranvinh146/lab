@@ -25,19 +25,26 @@ function loginUser($user) {
     exit() ;
 }
 
-if(isset($_POST['register-btn'])) {
+if(isset($_POST['register-btn']) || isset($_POST['create-admin'])) {
     $errors = validateUser($_POST);
 
     if(count($errors) === 0) {
 
-        unset($_POST['register-btn'], $_POST['passwordConf']);
-
+        unset($_POST['register-btn'], $_POST['passwordConf'], $_POST['create-admin']);
         $_POST['password'] = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
-        $user_id = create($table, $_POST);
-        $user = selectOne($table, ['id' => $user_id]);
-
-        loginUser($user);
+        if(isset($_POST['admin'])) {
+            $_POST['admin'] = 1;
+            $user_id = create($table, $_POST);
+            $_SESSION['message'] = 'Admin user created successfully';
+            $_SESSION['type'] = 'success';
+            header('location: ' . BASE_URL . '/admin/users/index.php');
+        } else {
+            $user_id = create($table, $_POST);
+            $user = selectOne($table, ['id' => $user_id]);
+    
+            loginUser($user);
+        }        
     
     } else {            
         $username = $_POST['username'];
