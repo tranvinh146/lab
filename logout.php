@@ -4,7 +4,9 @@ include("path.php");
 
 session_start();
 
-session_unset();
+unset($_SESSION['id']);
+unset($_SESSION['username']);
+unset($_SESSION['admin']);
 
 session_destroy();
 
