@@ -30,7 +30,7 @@ if(isset($_POST['add-post'])) {
         }
 
     } else {
-        array_push($errors, "Post image required");
+        // array_push($errors, "Post image required");
     }
 
     if(count($errors) == 0) {
@@ -93,6 +93,7 @@ if(isset($_POST['update-post'])) {
         $_SESSION['type'] = 'success';
         header("location: " . BASE_URL . "/admin/posts/index.php");
     } else {
+        $id = $_POST['id'];
         $title = $_POST['title'];
         $body = $_POST['body'];
         $topic_id = $_POST['topic_id'];

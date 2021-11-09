@@ -59,7 +59,7 @@
                         <thead>
                             <th>SN</th>
                             <th>Username</th>
-                            <th>Role</th>
+                            <th>Email</th>
                             <th colspan="2">Action</th>
                         </thead>
                         <tbody>

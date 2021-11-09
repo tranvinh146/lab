@@ -67,6 +67,7 @@ if (isset($_POST['update-topic'])) {
 
         exit();
     } else {
+        $id = $_POST['id'];
         $name = $_POST['name'];
         $description = $_POST['description'];
     }   

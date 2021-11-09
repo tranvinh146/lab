@@ -76,6 +76,7 @@ if (isset($_POST['update-user'])) {
         exit();
             
     } else {            
+        $id = $_POST['id'];
         $username = $_POST['username'];
         $email = $_POST['email'];
         $admin = isset($_POST['admin']) ? 1 : 0;
@@ -99,7 +100,7 @@ if(isset($_POST['login-btn'])) {
 
         unset($_POST['login-btn']);
 
-        $user = selectOne($table, ['username' => $_POST['username']]);
+        $user = selectOne($table, ['email' => $_POST['email']]);
 
         if($user && password_verify($_POST['password'], $user['password'])) {
             
@@ -111,7 +112,7 @@ if(isset($_POST['login-btn'])) {
     
     }         
 
-    $username = $_POST['username'];
+    $username = $_POST['email'];
     $password = $_POST['password'];
 
 }

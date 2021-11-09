@@ -39,8 +39,8 @@ include(ROOT_PATH . "/app/controllers/users.php");
       <?php include(ROOT_PATH . "/app/helpers/formErrors.php") ?>
 
       <div>
-        <label>Username</label>
-        <input type="text" name="username" class="text-input" value="<?php echo $username; ?>">
+        <label>Email</label>
+        <input type="text" name="email" class="text-input" value="<?php echo $email; ?>">
       </div>
       <div>
         <label>Password</label>

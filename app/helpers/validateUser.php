@@ -21,7 +21,11 @@ function validateUser($user) {
 
     $existingUser = selectOne('Users', ['email' => $user['email']]);
     if (isset($existingUser)) {
-        array_push($errors, 'Email already exists!');
+        if (isset($user['update-user']) && $existingUser['id'] != $user['id']) {
+            array_push($errors, 'Email already exists!');
+        } else {
+            array_push($errors, 'Email already exists!');
+        }
     }
 
     return $errors;
@@ -30,8 +34,8 @@ function validateUser($user) {
 function validateLogin($user) {
     $errors = array();
 
-    if (empty($user['username'])) {
-        array_push($errors, 'Username is required');
+    if (empty($user['email'])) {
+        array_push($errors, 'Email is required');
     }
 
     if (empty($user['password'])) {
