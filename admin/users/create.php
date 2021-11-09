@@ -69,11 +69,14 @@
                         </div>
                         <div>
                             <label>Password Confirmation</label>
-                            <input type="password" name="passwordConf"
-                                class="text-input">
+                            <input type="password" name="passwordConf" class="text-input">
                         </div>
                         <div>
-                            <input type="checkbox" name="admin" id="admin">
+                            <?php if(isset($admin) && $admin == 1): ?>
+                                <input type="checkbox" name="admin" id="admin" checked>
+                            <?php else: ?>
+                                <input type="checkbox" name="admin" id="admin">
+                            <?php endif; ?>
                             <label for="admin">Admin</label>
                         </div>
 
