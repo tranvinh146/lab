@@ -3,6 +3,16 @@
 include("path.php");
 include(ROOT_PATH . "/app/controllers/topics.php");
 
+$posts = array();
+$postTitle = 'Recent Posts';
+
+if(isset($_POST['search-term'])) {
+  $posts = searchPosts($_POST['search-term']);
+  $postTitle = "You searched for '" . $_POST['search-term'] . "'";
+} else {
+  $posts = getPublishedPosts();
+}
+
 ?>
 
 
@@ -46,56 +56,19 @@ include(ROOT_PATH . "/app/controllers/topics.php");
 
       <div class="post-wrapper">
 
-        <div class="post">
-          <img src="assets/images/image_2.png" alt="" class="slider-image">
-          <div class="post-info">
-            <h4><a href="single.html">One day your life will flash before your eyes</a></h4>
-            <i class="far fa-user"> Awa Melvine</i>
-            &nbsp;
-            <i class="far fa-calendar"> Mar 8, 2019</i>
-          </div>
-        </div>
+        <?php foreach($posts as $post): ?>
 
-        <div class="post">
-          <img src="assets/images/image_1.png" alt="" class="slider-image">
-          <div class="post-info">
-            <h4><a href="single.html">One day your life will flash before your eyes</a></h4>
-            <i class="far fa-user"> Awa Melvine</i>
-            &nbsp;
-            <i class="far fa-calendar"> Mar 8, 2019</i>
+          <div class="post">
+            <img src="<?php echo BASE_URL . '/assets/images/' . $post['image'] ?>" alt="" class="slider-image">
+            <div class="post-info">
+              <h4><a href="single.php"><?php echo $post['title'] ?></a></h4>
+              <i class="far fa-user"> <?php echo $post['username'] ?> </i>
+              &nbsp;
+              <i class="far fa-calendar"> <?php echo date('F j, Y', strtotime($post['created_at'])); ?> </i>
+            </div>
           </div>
-        </div>
-
-        <div class="post">
-          <img src="assets/images/image_6.png" alt="" class="slider-image">
-          <div class="post-info">
-            <h4><a href="single.html">One day your life will flash before your eyes</a></h4>
-            <i class="far fa-user"> Awa Melvine</i>
-            &nbsp;
-            <i class="far fa-calendar"> Mar 8, 2019</i>
-          </div>
-        </div>
-
-        <div class="post">
-          <img src="assets/images/image_1.png" alt="" class="slider-image">
-          <div class="post-info">
-            <h4><a href="single.html">One day your life will flash before your eyes</a></h4>
-            <i class="far fa-user"> Awa Melvine</i>
-            &nbsp;
-            <i class="far fa-calendar"> Mar 8, 2019</i>
-          </div>
-        </div>
-
-        <div class="post">
-          <img src="assets/images/image_7.png" alt="" class="slider-image">
-          <div class="post-info">
-            <h4><a href="single.html">One day your life will flash before your eyes</a></h4>
-            <i class="far fa-user"> Awa Melvine</i>
-            &nbsp;
-            <i class="far fa-calendar"> Mar 8, 2019</i>
-          </div>
-        </div>
-
+          
+        <?php endforeach; ?>
 
       </div>
 
@@ -107,66 +80,26 @@ include(ROOT_PATH . "/app/controllers/topics.php");
 
       <!-- Main Content -->
       <div class="main-content">
-        <h1 class="recent-post-title">Recent Posts</h1>
+        <h1 class="recent-post-title"><?php echo $postTitle  ?></h1>
+        
+        <?php foreach($posts as $post): ?>
 
-        <div class="post clearfix">
-          <img src="assets/images/image_3.png" alt="" class="post-image">
-          <div class="post-preview">
-            <h2><a href="single.hmtl">The strongest and sweetest songs yet remain to be sung</a></h2>
-            <i class="far fa-user"> Awa Melvine</i>
-            &nbsp;
-            <i class="far fa-calendar"> Mar 11, 2019</i>
-            <p class="preview-text">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-              Exercitationem optio possimus a inventore maxime laborum.
-            </p>
-            <a href="single.html" class="btn read-more">Read More</a>
+          <div class="post clearfix">
+            <img src="<?php echo BASE_URL . '/assets/images/' . $post['image'] ?>" alt="" class="post-image">
+            <div class="post-preview">
+              <h2><a href="single.php"><?php echo $post['title'] ?></a></h2>
+              <i class="far fa-user"> <?php echo $post['username'] ?> </i>
+              &nbsp;
+              <i class="far fa-calendar"> <?php echo date('F j, Y', strtotime($post['created_at'])); ?></i>
+              <p class="preview-text">
+                <?php echo html_entity_decode(substr($post['body'], 0, 150)) . '...'; ?>
+              </p>
+              <a href="single.html" class="btn read-more">Read More</a>
+            </div>
           </div>
-        </div>
 
-        <div class="post clearfix">
-          <img src="assets/images/image_4.png" alt="" class="post-image">
-          <div class="post-preview">
-            <h2><a href="single.hmtl">The strongest and sweetest songs yet remain to be sung</a></h2>
-            <i class="far fa-user"> Awa Melvine</i>
-            &nbsp;
-            <i class="far fa-calendar"> Mar 11, 2019</i>
-            <p class="preview-text">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-              Exercitationem optio possimus a inventore maxime laborum.
-            </p>
-            <a href="single.html" class="btn read-more">Read More</a>
-          </div>
-        </div>
-        <div class="post clearfix">
-          <img src="assets/images/image_3.png" alt="" class="post-image">
-          <div class="post-preview">
-            <h2><a href="single.hmtl">The strongest and sweetest songs yet remain to be sung</a></h2>
-            <i class="far fa-user"> Awa Melvine</i>
-            &nbsp;
-            <i class="far fa-calendar"> Mar 11, 2019</i>
-            <p class="preview-text">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-              Exercitationem optio possimus a inventore maxime laborum.
-            </p>
-            <a href="single.html" class="btn read-more">Read More</a>
-          </div>
-        </div>
-        <div class="post clearfix">
-          <img src="assets/images/image_3.png" alt="" class="post-image">
-          <div class="post-preview">
-            <h2><a href="single.hmtl">The strongest and sweetest songs yet remain to be sung</a></h2>
-            <i class="far fa-user"> Awa Melvine</i>
-            &nbsp;
-            <i class="far fa-calendar"> Mar 11, 2019</i>
-            <p class="preview-text">
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-              Exercitationem optio possimus a inventore maxime laborum.
-            </p>
-            <a href="single.html" class="btn read-more">Read More</a>
-          </div>
-        </div>
-
+        <?php endforeach; ?>
+        
       </div>
       <!-- // Main Content -->
 
@@ -174,10 +107,11 @@ include(ROOT_PATH . "/app/controllers/topics.php");
 
         <div class="section search">
           <h2 class="section-title">Search</h2>
-          <form action="index.html" method="post">
+          <form action="index.php" method="post">
             <input type="text" name="search-term" class="text-input" placeholder="Search...">
           </form>
         </div>
+        
 
 
         <div class="section topics">
