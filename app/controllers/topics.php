@@ -2,6 +2,7 @@
 
 include(ROOT_PATH . "/app/database/db.php");
 include(ROOT_PATH . "/app/helpers/validateTopic.php");
+include(ROOT_PATH . "/app/helpers/permission.php");
 
 $table = 'Topics';
 
@@ -14,6 +15,7 @@ $description = '';
 $topics = selectAll($table);
 
 if(isset($_POST['add-topic'])) {
+    adminOnly();
 
     $errors = validateTopic($_POST);
 
@@ -42,6 +44,8 @@ if (isset($_GET['id'])) {
 }
 
 if (isset($_GET['del_id'])) {
+    adminOnly();
+
     $id = $_GET['del_id'];
     $count = delete($table, $id);
 
@@ -53,6 +57,8 @@ if (isset($_GET['del_id'])) {
 }
 
 if (isset($_POST['update-topic'])) {
+    
+    adminOnly();
 
     $errors = validateTopic($_POST);    
 

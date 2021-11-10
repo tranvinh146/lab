@@ -2,6 +2,7 @@
 
 include(ROOT_PATH . "/app/database/db.php");
 include(ROOT_PATH . "/app/helpers/validateUser.php");
+include(ROOT_PATH . "/app/helpers/permission.php");
 
 $errors = array();
 
@@ -14,7 +15,7 @@ $table = 'Users';
 
 $admin_users = selectAll($table, ['admin' => 1]);
 
-$users = selectAll($table, ['admin' => 1]);
+$users = selectAll($table);
 
 function loginUser($user) {
     $_SESSION['id'] = $user['id'];
@@ -61,6 +62,9 @@ if(isset($_POST['register-btn']) || isset($_POST['create-admin'])) {
 }
 
 if (isset($_POST['update-user'])) {
+
+    adminOnly();
+
     $errors = validateUser($_POST);
 
     if(count($errors) === 0) {
@@ -90,7 +94,7 @@ if(isset($_GET['id'])) {
     $id = $user['id'];
     $username = $user['username'];
     $email = $user['email'];
-    $admin = isset($user['admin']) ? 1 : 0;
+    $admin = $user['admin'];
 }
 
 if(isset($_POST['login-btn'])) {
@@ -99,13 +103,10 @@ if(isset($_POST['login-btn'])) {
     if(count($errors) === 0) {
 
         unset($_POST['login-btn']);
-
         $user = selectOne($table, ['email' => $_POST['email']]);
 
-        if($user && password_verify($_POST['password'], $user['password'])) {
-            
+        if($user && password_verify($_POST['password'], $user['password'])) {          
            loginUser($user);
-
         } else {
             array_push($errors, 'Wrong credentials!');
         }  
@@ -118,6 +119,7 @@ if(isset($_POST['login-btn'])) {
 }
 
 if (isset($_GET['del_id'])) {
+    adminOnly();
     $count = delete($table, $_GET['del_id']);
 
     $_SESSION['message'] = 'Admin user deleted';

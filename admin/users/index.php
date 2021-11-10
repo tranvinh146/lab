@@ -1,6 +1,7 @@
 <?php
     include("../../path.php");
     include(ROOT_PATH . "/app/controllers/users.php");
+    adminOnly();
 ?>
 
 <!DOCTYPE html>
@@ -63,7 +64,7 @@
                             <th colspan="2">Action</th>
                         </thead>
                         <tbody>
-                            <?php foreach($admin_users as $key => $user): ?>
+                            <?php foreach($users as $key => $user): ?>
                                 <tr>
                                     <td><?php echo $key + 1; ?></td>
                                     <td><?php echo $user['username']; ?></td>

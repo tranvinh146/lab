@@ -23,7 +23,7 @@ function validateUser($user) {
     if (isset($existingUser)) {
         if (isset($user['update-user']) && $existingUser['id'] != $user['id']) {
             array_push($errors, 'Email already exists!');
-        } else {
+        } else if (!isset($user['update-user'])) {
             array_push($errors, 'Email already exists!');
         }
     }
