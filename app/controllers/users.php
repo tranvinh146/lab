@@ -33,6 +33,7 @@ function loginUser($user) {
 }
 
 if(isset($_POST['register-btn']) || isset($_POST['create-admin'])) {
+    
     $errors = validateUser($_POST);
 
     if(count($errors) === 0) {
@@ -113,7 +114,7 @@ if(isset($_POST['login-btn'])) {
     
     }         
 
-    $username = $_POST['email'];
+    $email = $_POST['email'];
     $password = $_POST['password'];
 
 }

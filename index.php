@@ -53,7 +53,7 @@ if (isset($_GET['t_id'])) {
 
     <!-- Post Slider -->
     <div class="post-slider">
-      <h1 id='xss' class="slider-title">Trending Posts</h1>
+      <h1 class="slider-title">Trending Posts</h1>
       <i class="fas fa-chevron-left prev"></i>
       <i class="fas fa-chevron-right next"></i>
 
