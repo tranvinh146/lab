@@ -2,7 +2,7 @@
     <div class="footer-content">
 
       <div class="footer-section about">
-        <h1 class="logo-text"><span>Awa</span>Inspires</h1>
+        <h1 class="logo-text"><span>TranVinh</span>Lab</h1>
         <p>
           AwaInspires is a fictional blog conceived for the purpose of a tutorial on YouTube.
           However, Awa has a blog called pieceofadvice.org where he writes truly inspiring stuff.

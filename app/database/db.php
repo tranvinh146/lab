@@ -144,6 +144,19 @@ function getPublishedPosts() {
     return $records;
 }
 
+function getPostByTopicId($topic_id) {
+    global $conn;
+    $sql = "SELECT p.*, u.username 
+            FROM Posts AS p 
+            JOIN Users AS u 
+            ON p.user_id=u.id 
+            WHERE p.published = ? AND p.topic_id = ?";
+
+    $stmt = executeQuery($sql, ['published' => 1, 'topic_id' => $topic_id]);
+    $records = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    return $records;
+}
+
 function searchPosts($term) {
     global $conn;
     $match = '%' . $term . '%';
