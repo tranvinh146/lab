@@ -2,7 +2,7 @@
 
 function userOnly() {
     if (empty($_SESSION['id'])) {
-        $_SESSION['message'] = 'You need to login first!';
+        $_SESSION['message'] = 'You need to login first';
         $_SESSION['type'] = 'error';
         header('location: ' . BASE_URL . '/index.php');
         exit(0);
