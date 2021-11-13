@@ -261,7 +261,7 @@ a {
     text-align: center;
     margin-bottom: 40px;
   }
-  
+
   .content .main-content .post {
     width: 95%;
     height: 270px;
@@ -371,6 +371,46 @@ a {
     padding-left: 10px;
     transition: all 0.3s;
   }
+
+  /*  Comment section  */
+  .page-wrapper .comment-section {
+    background: white;
+    padding: 20px;
+    margin: 20px 80px;
+    margin-bottom: 60px;
+    border-radius: 5px;
+  }
+
+  .page-wrapper .comment-section form {
+    margin-bottom: 30px;
+  }
+
+  .page-wrapper .comment-section textarea {
+    width: 100%;
+    height: 5em;
+    resize: none;
+  }
+
+  .page-wrapper .comment-section .comments {
+    border-top: 1px rgb(127, 125, 125) solid;
+    padding-top: 10px;
+  }
+
+  .page-wrapper .comment-section .comments .user {
+    float: left;
+  }
+
+  .page-wrapper .comment-section .comments .datetime {
+    font-style: italic;
+    float: right;
+    font-weight: normal;
+  }
+
+  .page-wrapper .comment-section .comments .content-comment{
+    padding-left: 15px;
+    margin-top: 10px;
+  }
+  
   
   /* AUTH PAGES */
   

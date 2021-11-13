@@ -2,6 +2,7 @@
 
 session_start();
 require("connect.php");
+date_default_timezone_set('	Asia/Ho_Chi_Minh');
 
 function dd($value) {
     echo "<pre>" . print_r($value, true) . "</pre>";
@@ -168,6 +169,19 @@ function searchPosts($term) {
             AND p.title LIKE ? OR p.body LIKE ?";
 
     $stmt = executeQuery($sql, ['published' => 1, 'title' => $match, 'body' => $match]);
+    $records = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    return $records;
+}
+
+function showComments($post_id) {
+    global $conn;
+    $sql = "SELECT cmt.*, u.username 
+            FROM Comments AS cmt 
+            JOIN Users AS u 
+            ON cmt.user_id = u.id 
+            WHERE cmt.post_id = ?";
+
+    $stmt = executeQuery($sql, ['post_id' => $post_id]);
     $records = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     return $records;
 }

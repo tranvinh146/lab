@@ -2,9 +2,11 @@
 
 include("path.php");
 include(ROOT_PATH . "/app/controllers/posts.php");
+include(ROOT_PATH . "/app/controllers/comments.php");
 
 if(isset($_GET['id'])) {
   $post = selectOne('Posts', ['id' => $_GET['id']]);
+  $comments = showComments($_GET['id']);
 }
 
 $posts = selectAll('Posts', ['published' => 1]);
@@ -58,10 +60,13 @@ $topics = selectAll('Topics');
           <div class="post-content">
             <?php echo html_entity_decode($post['body']) ?>
           </div>
-
+          
         </div>
+         
       </div>
       <!-- // Main Content -->
+
+     
 
       <!-- Sidebar -->
       <div class="sidebar single">
@@ -72,14 +77,13 @@ $topics = selectAll('Topics');
               href="https://web.facebook.com/codingpoets/">Coding Poets</a></blockquote>
         </div> -->
 
-
         <div class="section popular">
           <h2 class="section-title">Popular</h2>
 
           <?php foreach($posts as $p): ?>
             <div class="post clearfix">
               <img src="<?php echo "assets/images/" . $p['image'] ?>" alt="">
-              <a href="" class="title">
+              <a href="single.php?id=<?php echo $p['id'] ?>" class="title">
                 <h4><?php echo $p['title'] ?></h4>
               </a>
             </div>
@@ -102,6 +106,35 @@ $topics = selectAll('Topics');
 
     </div>
     <!-- // Content -->
+
+    <!-- // Comments -->
+          
+    <div class="comment-section">
+      <div class="comment-title">
+        <h3>Comments</h3>
+      </div>
+
+      <form action="" method="POST">
+        <input type="hidden" name="post_id" value="<?php echo $post['id'] ?>">
+        <textarea name="content" id="" cols="30" rows="10"></textarea>
+        <button type="send" name='send-comment'>Comment</button>
+      </form>
+      
+      <!-- Show comments -->
+      <?php foreach($comments as $cmt): ?>
+        <div class="comments">
+          <h4 class="user">
+            <?php echo $cmt['username'] ?>
+          </h4>
+          <span class="datetime"><?php echo $cmt['created_at'] ?></span>
+          <div class="clearfix"></div>
+          <p class="content-comment"><?php echo $cmt['content'] ?></p>
+        </div>
+      <?php endforeach; ?>
+
+    </div>
+
+    <!-- // Comments -->
 
   </div>
   <!-- // Page Wrapper -->
