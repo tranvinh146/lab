@@ -10,8 +10,9 @@ if (isset($_GET['t_id'])) {
   $posts = getPostByTopicId($_GET['t_id']);
   $postTitle = 'Topic: ' . $_GET['name'];
 } else if(isset($_POST['search-term'])) {
-  $posts = searchPosts($_POST['search-term']);
-  $postTitle = "You searched for '" . $_POST['search-term'] . "'";
+  $term = htmlentities($_POST['search-term']);
+  $posts = searchPosts($term);
+  $postTitle = "You searched for '" .$term . "'";
 } else {
   $posts = getPublishedPosts();
 }

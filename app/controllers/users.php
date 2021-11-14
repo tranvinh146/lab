@@ -98,6 +98,8 @@ if(isset($_GET['id'])) {
     $admin = $user['admin'];
 }
 
+
+// LOGIN
 if(isset($_POST['login-btn'])) {
     $errors = validateLogin($_POST);
 
@@ -105,6 +107,9 @@ if(isset($_POST['login-btn'])) {
 
         unset($_POST['login-btn']);
         $user = selectOne($table, ['email' => $_POST['email']]);
+        
+        // $user = selectSQLi('Users',$_POST['email']); #sql injection
+        // $user = selectPreventSQLi('Users',$_POST['email']); #prevent sql injection
 
         if($user && password_verify($_POST['password'], $user['password'])) {          
            loginUser($user);

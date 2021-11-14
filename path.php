@@ -4,4 +4,7 @@
 
     define("BASE_URL", "https://tranvinhlab.com");
 
+    // define("BASE_URL", "https://localhost");
+
+
 ?>

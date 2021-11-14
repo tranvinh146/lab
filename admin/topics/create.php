@@ -62,13 +62,13 @@
                         </div>
                         <div>
                             <label>Description</label>
-                            <textarea name="description" value="<?php echo $description; ?>" id="body"></textarea>
+                            <textarea name="description" id="body"><?php echo $description; ?></textarea>
                         </div>
 
                         <div>
                             <button type="submit" class="btn btn-big" name="add-topic">Add Topic</button>
                         </div>
-                    </form>
+                    </form>                  
 
                 </div>
 
@@ -77,7 +77,7 @@
 
         </div>
         <!-- // Page Wrapper -->
-
+        
 
 
          <!-- JQuery -->
