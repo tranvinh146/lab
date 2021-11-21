@@ -18,6 +18,8 @@ $admin_users = selectAll($table, ['admin' => 1]);
 $users = selectAll($table);
 
 function loginUser($user) {
+    $_SESSION['key'] = bin2hex(random_bytes(32));
+    $_SESSION['value'] = hash_hmac('sha256', md5(rand()) ,$_SESSION['key']);
     $_SESSION['id'] = $user['id'];
     $_SESSION['username'] = $user['username'];
     $_SESSION['admin'] = $user['admin'];
@@ -32,27 +34,36 @@ function loginUser($user) {
     exit() ;
 }
 
-if(isset($_POST['register-btn']) || isset($_POST['create-admin'])) {
+if(isset($_POST['register-btn'])) {
     
     $errors = validateUser($_POST);
 
     if(count($errors) === 0) {
 
-        unset($_POST['register-btn'], $_POST['passwordConf'], $_POST['create-admin']);
+        unset($_POST['register-btn'], $_POST['passwordConf']);
         $_POST['password'] = password_hash($_POST['password'], PASSWORD_DEFAULT);
-
-        if(isset($_POST['admin'])) {
-            $_POST['admin'] = 1;
-            $user_id = create($table, $_POST);
-            $_SESSION['message'] = 'Admin user created successfully';
-            $_SESSION['type'] = 'success';
-            header('location: ' . BASE_URL . '/admin/users/index.php');
-        } else {
-            $user_id = create($table, $_POST);
-            $user = selectOne($table, ['id' => $user_id]);
+        $user_id = create($table, $_POST);
+        $user = selectOne($table, ['id' => $user_id]);
+        loginUser($user);      
     
-            loginUser($user);
-        }        
+    } else {            
+        $username = $_POST['username'];
+        $email = $_POST['email'];
+    }
+
+}
+
+if(isset($_POST['create-admin'])) {    
+    adminOnly();
+    $errors = validateUser($_POST);
+    if(count($errors) === 0) {
+        unset($_POST['csrf-token'], $_POST['register-btn'], $_POST['passwordConf'], $_POST['create-admin']);
+        $_POST['password'] = password_hash($_POST['password'], PASSWORD_DEFAULT);        
+        $_POST['admin'] = isset($_POST['admin']) ? 1 : 0;
+        $user_id = create($table, $_POST);
+        $_SESSION['message'] = 'Admin user created successfully';
+        $_SESSION['type'] = 'success';
+        header('location: ' . BASE_URL . '/admin/users/index.php');               
     
     } else {            
         $username = $_POST['username'];
@@ -65,12 +76,11 @@ if(isset($_POST['register-btn']) || isset($_POST['create-admin'])) {
 if (isset($_POST['update-user'])) {
 
     adminOnly();
-
     $errors = validateUser($_POST);
 
-    if(count($errors) === 0) {
+    if(count($errors) === 0 && preventCSRF($_POST['csrf-token'])) {
         $id = $_POST['id'];
-        unset($_POST['passwordConf'], $_POST['update-user'], $_POST['id']);
+        unset($_POST['csrf-token'], $_POST['passwordConf'], $_POST['update-user'], $_POST['id']);
         $_POST['password'] = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
         $_POST['admin'] = isset($_POST['admin']) ? 1 : 0;
@@ -126,12 +136,14 @@ if(isset($_POST['login-btn'])) {
 
 if (isset($_GET['del_id'])) {
     adminOnly();
-    $count = delete($table, $_GET['del_id']);
+    if(preventCSRF($_GET['csrf-token'])) {
+        $count = delete($table, $_GET['del_id']);
 
-    $_SESSION['message'] = 'Admin user deleted';
-    $_SESSION['type'] = 'success';
-    header('location: ' . BASE_URL . '/admin/users/index.php');
-    exit();
+        $_SESSION['message'] = 'Admin user deleted';
+        $_SESSION['type'] = 'success';
+        header('location: ' . BASE_URL . '/admin/users/index.php');
+        exit();
+    }    
 }
 
 ?>

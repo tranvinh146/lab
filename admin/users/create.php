@@ -56,6 +56,7 @@
                     <?php include(ROOT_PATH . "/app/helpers/formErrors.php") ?>
 
                     <form action="create.php" method="post">
+                        <input type="hidden" name="csrf-token" value="<?php echo $_SESSION['value'] ?? ''; ?>">
                         <div>
                             <label>Username</label>
                             <input type="text" name="username" class="text-input" value="<?php echo $username; ?>">

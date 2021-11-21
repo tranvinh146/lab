@@ -56,6 +56,7 @@
                     <?php include(ROOT_PATH . "/app/helpers/formErrors.php") ?>
 
                     <form action="create.php" method="post">
+                        <input type="hidden" name="csrf-token" value="<?php echo $_SESSION['value'] ?? ''; ?>">
                         <div>
                             <label>Name</label>
                             <input type="text" name="name" value="<?php echo $name; ?>" class="text-input">
@@ -77,7 +78,6 @@
 
         </div>
         <!-- // Page Wrapper -->
-        
 
 
          <!-- JQuery -->

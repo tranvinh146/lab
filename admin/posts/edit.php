@@ -55,7 +55,8 @@
                     <h2 class="page-title">Edit Post</h2>                    
                     <?php include(ROOT_PATH . "/app/helpers/formErrors.php") ?>
 
-                    <form action="edit.php" method="post" enctype="multipart/form-data">                    
+                    <form action="edit.php" method="post" enctype="multipart/form-data"> 
+                        <input type="hidden" name="csrf-token" value="<?php echo $_SESSION['value'] ?? ''; ?>">                   
                         <input type="hidden" name="id" value="<?php echo $id ?>">    
                         <div>
                             <label>Title</label>

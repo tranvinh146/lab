@@ -70,7 +70,7 @@
                                     <td><?php echo $user['username']; ?></td>
                                     <td><?php echo $user['email']; ?></td>
                                     <td><a href="edit.php?id=<?php echo $user['id']; ?>" class="edit">edit</a></td>
-                                    <td><a href="index.php?del_id=<?php echo $user['id'] ?>" class="delete">delete</a></td>
+                                    <td><a href="index.php?del_id=<?php echo $user['id'] ?>&csrf-token=<?php  echo $_SESSION['value'] ?>" class="delete">delete</a></td>
                                 </tr>
                             <?php endforeach; ?>
                         </tbody>
