@@ -35,8 +35,8 @@ if(isset($_POST['add-post'])) {
         // array_push($errors, "Post image required");
     }
 
-    if(count($errors) == 0) {
-        unset($_POST['add-post']);
+    if(count($errors) == 0 && preventCSRF($_POST['csrf-token'])) {
+        unset($_POST['add-post'], $_POST['csrf-token']);
         $_POST['user_id'] = $_SESSION['id'];
         $_POST['published'] = isset($_POST['published']) ? 1 : 0;
         $_POST['body'] = htmlentities($_POST['body']);
@@ -84,9 +84,9 @@ if(isset($_POST['update-post'])) {
         // array_push($errors, "Post image required");
     }
 
-    if(count($errors) == 0) {
+    if(count($errors) == 0 && preventCSRF($_POST['csrf-token'])) {
         $id = $_POST['id'];
-        unset($_POST['update-post'], $_POST['id']);
+        unset($_POST['update-post'], $_POST['id'], $_POST['csrf-token']);
         $_POST['user_id'] = $_SESSION['id'];
         $_POST['published'] = isset($_POST['published']) ? 1 : 0;
         $_POST['body'] = htmlentities($_POST['body']);

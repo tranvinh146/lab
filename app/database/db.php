@@ -2,7 +2,7 @@
 
 session_start();
 require("connect.php");
-date_default_timezone_set('	Asia/Ho_Chi_Minh');
+date_default_timezone_set('Asia/Ho_Chi_Minh');
 
 function dd($value) {
     echo "<pre>" . print_r($value, true) . "</pre>";

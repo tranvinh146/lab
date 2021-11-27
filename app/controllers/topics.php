@@ -19,8 +19,8 @@ if(isset($_POST['add-topic'])) {
 
     $errors = validateTopic($_POST);
 
-    if (count($errors) === 0) {
-        unset($_POST['add-topic']);
+    if (count($errors) === 0 && preventCSRF($_POST['csrf-token'])) {
+        unset($_POST['add-topic'], $_POST['csrf-token']);
 
         $topic_id = create('Topics', $_POST);
         $_SESSION['message'] = 'Topic created successfully.';
@@ -62,9 +62,9 @@ if (isset($_POST['update-topic'])) {
 
     $errors = validateTopic($_POST);    
 
-    if (count($errors) === 0) {
+    if (count($errors) === 0 && preventCSRF($_POST['csrf-token'])) {
         $id = $_POST['id'];
-        unset($_POST['update-topic'], $_POST['id']);
+        unset($_POST['update-topic'], $_POST['id'], $_POST['csrf-token']);
         $topic_id = update($table, $id, $_POST);
 
         $_SESSION['message'] = 'Topic is updated sucessfully';

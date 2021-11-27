@@ -18,9 +18,9 @@ $admin_users = selectAll($table, ['admin' => 1]);
 $users = selectAll($table);
 
 function loginUser($user) {
+    $_SESSION['id'] = $user['id'];
     $_SESSION['key'] = bin2hex(random_bytes(32));
     $_SESSION['value'] = hash_hmac('sha256', md5(rand()) ,$_SESSION['key']);
-    $_SESSION['id'] = $user['id'];
     $_SESSION['username'] = $user['username'];
     $_SESSION['admin'] = $user['admin'];
     $_SESSION['message'] = 'You are now logged in';
@@ -56,7 +56,7 @@ if(isset($_POST['register-btn'])) {
 if(isset($_POST['create-admin'])) {    
     adminOnly();
     $errors = validateUser($_POST);
-    if(count($errors) === 0) {
+    if(count($errors) === 0 && preventCSRF($_POST['csrf-token'])) {
         unset($_POST['csrf-token'], $_POST['register-btn'], $_POST['passwordConf'], $_POST['create-admin']);
         $_POST['password'] = password_hash($_POST['password'], PASSWORD_DEFAULT);        
         $_POST['admin'] = isset($_POST['admin']) ? 1 : 0;
