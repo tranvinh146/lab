@@ -41,7 +41,6 @@
             <!-- Left Sidebar -->
             <?php include(ROOT_PATH . "/app/includes/adminSidebar.php"); ?>
 
-
             <!-- Admin Content -->
             <div class="admin-content">
                 <div class="button-group">

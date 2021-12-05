@@ -109,19 +109,21 @@ if(isset($_GET['id'])) {
 }
 
 
-// LOGIN
+// LOGIN - SQL injection
 if(isset($_POST['login-btn'])) {
     $errors = validateLogin($_POST);
 
     if(count($errors) === 0) {
 
         unset($_POST['login-btn']);
+        
         $user = selectOne($table, ['email' => $_POST['email']]);
         
-        // $user = selectSQLi('Users',$_POST['email']); #sql injection
+        // $user = selectSQLi('Users',$_POST['email'], $_POST['password']); #sql injection
         // $user = selectPreventSQLi('Users',$_POST['email']); #prevent sql injection
-
-        if($user && password_verify($_POST['password'], $user['password'])) {          
+        
+        // if($user) { #sql injection  
+        if($user && password_verify($_POST['password'], $user['password'])) {     #prevent sql injection     
            loginUser($user);
         } else {
             array_push($errors, 'Wrong credentials!');

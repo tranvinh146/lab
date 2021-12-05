@@ -10,6 +10,7 @@ if (isset($_GET['t_id'])) {
   $posts = getPostByTopicId($_GET['t_id']);
   $postTitle = 'Topic: ' . $_GET['name'];
 } else if(isset($_POST['search-term'])) {
+  // XSS
   $term = htmlentities($_POST['search-term']);
   $posts = searchPosts($term);
   $postTitle = "You searched for '" .$term . "'";
@@ -66,9 +67,11 @@ if (isset($_GET['t_id'])) {
             <img src="<?php echo BASE_URL . '/assets/images/' . $post['image'] ?>" alt="" class="slider-image">
             <div class="post-info">
               <h4><a href="single.php?id=<?php echo $post['id'] ?>"><?php echo $post['title'] ?></a></h4>
-              <i class="far fa-user"> <?php echo $post['username'] ?> </i>
-              &nbsp;
-              <i class="far fa-calendar"> <?php echo date('F j, Y', strtotime($post['created_at'])); ?> </i>
+              <div>
+                <i class="far fa-user"> <?php echo $post['username'] ?> </i>
+                &nbsp;
+                <i class="far fa-calendar"> <?php echo date('F j, Y', strtotime($post['created_at'])); ?> </i>
+              </div>
             </div>
           </div>
           

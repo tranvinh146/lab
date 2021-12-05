@@ -128,6 +128,7 @@ $topics = selectAll('Topics');
           </h4>
           <span class="datetime"><?php echo $cmt['created_at'] ?></span>
           <div class="clearfix"></div>
+          <!-- XSS -->
           <p class="content-comment"><?php echo strip_tags($cmt['content']) ?></p>
         </div>
       <?php endforeach; ?>

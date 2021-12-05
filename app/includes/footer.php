@@ -44,13 +44,13 @@
       <div class="footer-section contact-form">
         <h2>Contact us</h2>
         <br>
-        <form action="index.html" method="post">
+        <form action="">
           <input type="email" name="email" class="text-input contact-input" placeholder="Your email address...">
           <textarea rows="4" name="message" class="text-input contact-input" placeholder="Your message..."></textarea>
-          <button type="submit" class="btn btn-big contact-btn">
+          <!-- <button type="submit" class="btn btn-big contact-btn">
             <i class="fas fa-envelope"></i>
             Send
-          </button>
+          </button> -->
         </form>
       </div>
 

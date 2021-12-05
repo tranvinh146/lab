@@ -7,7 +7,7 @@ include(ROOT_PATH . "/app/helpers/permission.php");
 $topics = selectAll('Topics');
 
 $table = 'Posts';
-$posts = selectAll($table);
+$posts = getFullPosts();
 $errors = array();
 
 $id = '';

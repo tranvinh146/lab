@@ -18,7 +18,7 @@ if(isset($_POST['add-topic'])) {
     adminOnly();
 
     $errors = validateTopic($_POST);
-
+    // if (count($errors) === 0) {    
     if (count($errors) === 0 && preventCSRF($_POST['csrf-token'])) {
         unset($_POST['add-topic'], $_POST['csrf-token']);
 
